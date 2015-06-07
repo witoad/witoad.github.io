@@ -11,8 +11,10 @@
 <body>
 <div class="g-doc">
     <div class="g-hd">
-        <h1 class="clientWidth">clientWidth:<b></b></h1> 
-        <h1 class="clientHeight">clientHeight:<b></b></h1> 
+        <h1 class="clientWidth"><pre>clientWidth:   <pre><b></b></h1> 
+        <h1 class="clientHeight"><pre>clientHeight:  <pre><b></b></h1> 
+        <h1 class="screenWidth"><pre>screenWidth:   <pre><b></b></h1> 
+        <h1 class="screenHeight"><pre>screenHeight:  <pre><b></b></h1> 
     </div>
     <div class="g-bd">
         <div class="g-mn">
@@ -29,6 +31,8 @@
 <script type="text/javascript">
  document.querySelector(".clientWidth b").textContent=document.documentElement.clientWidth;
  document.querySelector(".clientHeight b").textContent=document.documentElement.clientHeight;
+ document.querySelector(".screenWidth b").textContent=screen.width;
+ document.querySelector(".screenHeight b").textContent=screen.height;
 </script>
 </body>
 </html>
