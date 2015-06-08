@@ -19,5 +19,5 @@ body{background:#fff;}
 a,a:hover{color:#333;}
 .g-mn{width:16rem ;height:100px;border: 1px solid black;}
 html{font-size:20px;}
-.g-ft{border-left:100px green solid;height:100px;}
+.g-ft{border:100px green solid;height:100px;}
 .g-sd{width:100px;height :100px;background-color:red}
