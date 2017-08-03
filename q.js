@@ -24,16 +24,16 @@ self.addEventListener("install",(event) => {
 	        );
 
 })
-self.addEventListener("activate",(event) => {
-	event.waitUntil(
-		caches.key().then(key =>{
-			let ops = keys.map(key =>{
-				if(key !== cacheKey) return caches.delete(key);
-			});
-			return Promise.all(ops);
-		})
-    )
-});
+// self.addEventListener("activate",(event) => {
+// 	event.waitUntil(
+// 		caches.key().then(key =>{
+// 			let ops = keys.map(key =>{
+// 				if(key !== cacheKey) return caches.delete(key);
+// 			});
+// 			return Promise.all(ops);
+// 		})
+//     )
+// });
 self.addEventListener("fetch",(event) => {
 	let req = event.request;
 	event.respondWith(
