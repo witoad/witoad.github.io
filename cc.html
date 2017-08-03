@@ -13,7 +13,7 @@
 <script src="./alloy_touch.js"></script>
 <script src="./alloy_touch.select.multiple.js"></script>
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,user-scalable=no">
-<link rel="stylesheet" type="text/css" href="index.css">
+
 <style>
 .header{
 position:fixed;
@@ -27,8 +27,9 @@ left:0px;
 z-index:999;
 }
 .svg1{
-width:3000px;overflow:hidden;-webkit-overflow-scrolling: touch;position:absolute;z-index: 998;
+width:814px;overflow:scroll;-webkit-overflow-scrolling: touch;position:absolute;z-index: 1000;
 }
+
 .search{
 width:276px;
 border:0;
@@ -78,6 +79,7 @@ width:20px;
 height:20px;
 left:16px;	
 }
+
 .arrowright{
 width:20px;
 height:20px;
@@ -110,6 +112,18 @@ left:52px;
         <div id="selectCtn"></div>
 
     <script>
+    		var obj = document.getElementById('svgDiv');
+
+  function loadSVG(num){
+    var xhr = new XMLHttpRequest();
+        xhr.open("get",num,false);
+        xhr.send();
+      if(xhr.status === 200){
+       var y = xhr.responseText;
+       return y
+   }
+  }
+
  var at = new AlloyTouch.MultipleSelect({
         options: [
             {name: 'T011保护屏', list: [
@@ -195,14 +209,11 @@ left:52px;
             evt.preventDefault();
         }, false);
     function objLoadFunc() {
-    var doc = document.getElementById(f);  
+var obj = document.getElementById('svgDiv');
 
-
-
-     var el = doc.contentDocument.children[0];
-        Transform(el);
+        
         var initScale = 1;
-        var gesture = new AlloyFinger(el, {
+        var gesture = new AlloyFinger(obj, {
             // rotate: function (evt) {
             //     el.rotateZ += evt.angle;
             // },
@@ -213,8 +224,7 @@ left:52px;
             //     el.scaleX = el.scaleY = initScale * evt.scale;
             // },
             pressMove: function (evt) {
-                el.translateX += evt.deltaX;
-                el.translateY += evt.deltaY;
+        
                 evt.preventDefault();
             
             },
@@ -224,6 +234,7 @@ left:52px;
                 //     el.translateX = 400;
                 // el.translateY = 400;
                 evt.preventDefault();
+                alert(3);
                 var evt= evt.target;
                 var evtX = evt.textContent;
                 if(/D[0-9]{4}-[0-9]{2}/.test(evtX)) 
@@ -251,34 +262,21 @@ left:52px;
     // doc.contentDocument.addEventListener('click',function(e){},false);
 }
 		function foo(evtX){
-			var doc = document.getElementById(f); 
-
             if(spaceX[evtX]){
-            doc.parentNode.removeChild(doc);
             f = spaceX[evtX];
    			loadFunc();
-   		    }
-   			
+   		    }   			
 		}
      function loadFunc() {  
-       var obj = document.createElement('object');
-		   obj.id = f;
-		   obj.setAttribute('type', 'image/svg+xml');
-		   obj.setAttribute('data', f);
-		   obj.setAttribute('class', 'svg1');
-		   obj.addEventListener('load', objLoadFunc, false);
-		   var container = document.getElementById('svgDiv');
-		   container.appendChild(obj);
+
+		obj.setAttribute('class', 'svg1');
+        obj.innerHTML= loadSVG(f);
+        alert(obj.children)
+		// obj.addEventListener('click', objLoadFunc, false);
+		objLoadFunc();
 		      
 		 }  
-     window.addEventListener('load', loadFunc, false);  
-     if ('serviceWorker' in navigator) {  
-  navigator.serviceWorker.register('sw.js').then(function(registration) {  
-    console.log('ServiceWorker registration successful with scope: ',    registration.scope);  
-  }).catch(function(err) {  
-    console.log('ServiceWorker registration failed: ', err);  
-  });  
-}    
+     window.addEventListener('load', loadFunc, false);    
     </script>
 
  </body>
